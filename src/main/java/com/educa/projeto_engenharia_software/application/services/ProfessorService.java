@@ -4,6 +4,7 @@ import com.educa.projeto_engenharia_software.application.DTOs.ProfessorDTO;
 import com.educa.projeto_engenharia_software.domain.entities.Disciplina;
 import com.educa.projeto_engenharia_software.domain.entities.Professor;
 import com.educa.projeto_engenharia_software.infra.database.repositories.ProfessorRepository;
+import com.educa.projeto_engenharia_software.infra.exceptions.ProfessorNotFoundException;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,7 +39,7 @@ public class ProfessorService {
         Optional<Professor> professor = professorRepository.findById(id);
 
         if(professor.isEmpty()) {
-            throw new EntityNotFoundException("Professor nao encontrado!");
+            throw new ProfessorNotFoundException();
         }
 
         return professor.get();

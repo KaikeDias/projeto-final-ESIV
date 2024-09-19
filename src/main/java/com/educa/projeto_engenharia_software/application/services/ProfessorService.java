@@ -1,6 +1,7 @@
 package com.educa.projeto_engenharia_software.application.services;
 
 import com.educa.projeto_engenharia_software.application.DTOs.ProfessorDTO;
+import com.educa.projeto_engenharia_software.domain.entities.Disciplina;
 import com.educa.projeto_engenharia_software.domain.entities.Professor;
 import com.educa.projeto_engenharia_software.infra.database.repositories.ProfessorRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -47,5 +48,11 @@ public class ProfessorService {
         Professor professor = findById(id);
 
         professorRepository.deleteById(id);
+    }
+
+    public List<Disciplina> buscaDisciplinas(long id) {
+        Professor professor = findById(id);
+
+        return professor.getDisciplinas();
     }
 }

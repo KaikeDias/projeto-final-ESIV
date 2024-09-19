@@ -6,6 +6,7 @@ import com.educa.projeto_engenharia_software.domain.entities.Aluno;
 import com.educa.projeto_engenharia_software.domain.entities.Disciplina;
 import com.educa.projeto_engenharia_software.infra.database.repositories.AlunoRepository;
 import com.educa.projeto_engenharia_software.infra.database.repositories.DisciplinaRepository;
+import com.educa.projeto_engenharia_software.infra.exceptions.AlunoNotFoundException;
 import jakarta.persistence.EntityNotFoundException;
 import org.apache.coyote.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +45,7 @@ public class AlunoService {
         Optional<Aluno> aluno = alunoRepository.findById(id);
 
         if(aluno.isEmpty()) {
-            throw new EntityNotFoundException("Aluno não encontrado");
+            throw new AlunoNotFoundException();
         }
 
         return aluno.get();

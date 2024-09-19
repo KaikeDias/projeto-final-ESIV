@@ -4,6 +4,7 @@ import com.educa.projeto_engenharia_software.application.DTOs.DisciplinaDTO;
 import com.educa.projeto_engenharia_software.domain.entities.Disciplina;
 import com.educa.projeto_engenharia_software.domain.entities.Professor;
 import com.educa.projeto_engenharia_software.infra.database.repositories.DisciplinaRepository;
+import com.educa.projeto_engenharia_software.infra.exceptions.DisciplinaNotFoundException;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,7 +42,7 @@ public class DisciplinaService {
         Optional<Disciplina> disciplina = disciplinaRepository.findById(id);
 
         if(disciplina.isEmpty()) {
-            throw new EntityNotFoundException();
+            throw new DisciplinaNotFoundException();
         }
 
         return disciplina.get();

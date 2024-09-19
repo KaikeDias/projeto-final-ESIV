@@ -57,6 +57,10 @@ public class AlunoService {
     public void matricularAluno(MatricularAlunoDTO matricularAlunoDTO) {
         Aluno aluno = findById(matricularAlunoDTO.alunoId());
 
+        if(aluno.getDisciplinas().size() == 4) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "O Aluno alcançou o limite maximo de disciplinas!");
+        }
+
         for(Disciplina disciplina : aluno.getDisciplinas()) {
             if(disciplina.getId() == matricularAlunoDTO.disciplinaId()) {
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "O Aluno já está matriculado nessa disciplina!");

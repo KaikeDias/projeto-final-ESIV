@@ -1,5 +1,6 @@
 package com.educa.projeto_engenharia_software.domain.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -26,5 +27,6 @@ public class Aluno {
             joinColumns = @JoinColumn(name = "aluno_id"),
             inverseJoinColumns = @JoinColumn(name = "disciplina_id")
     )
+    @JsonIgnore
     private List<Disciplina> disciplinas;
 }

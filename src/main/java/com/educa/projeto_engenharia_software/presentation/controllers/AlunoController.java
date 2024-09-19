@@ -1,8 +1,10 @@
 package com.educa.projeto_engenharia_software.presentation.controllers;
 
 import com.educa.projeto_engenharia_software.application.DTOs.AlunoDTO;
+import com.educa.projeto_engenharia_software.application.DTOs.MatricularAlunoDTO;
 import com.educa.projeto_engenharia_software.application.services.AlunoService;
 import com.educa.projeto_engenharia_software.domain.entities.Aluno;
+import com.educa.projeto_engenharia_software.domain.entities.Disciplina;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,7 +28,7 @@ public class AlunoController {
 
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
-    
+
     @GetMapping
     public ResponseEntity<List<Aluno>> getAllAlunos() {
         List<Aluno> alunos = alunoService.fingAll();
@@ -48,4 +50,17 @@ public class AlunoController {
         return ResponseEntity.noContent().build();
     }
 
+    @PostMapping("/matricula")
+    public ResponseEntity<Void> matricularAlunoDisciplina(@RequestBody MatricularAlunoDTO matricularAlunoDTO) {
+        alunoService.matricularAluno(matricularAlunoDTO);
+
+        return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/{id}/disciplinas")
+    public ResponseEntity<List<Disciplina>> getDisciplinasMatriculadas(@PathVariable long id) {
+        List<Disciplina> lista = alunoService.buscarDisciplinasMatriculadas(id);
+
+        return ResponseEntity.ok(lista);
+    }
 }
